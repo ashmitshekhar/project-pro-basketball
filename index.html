@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pro Basketball Challenge</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="game-wrapper">
+        <div class="menu-screen" id="menuScreen">
+            <h1>Pro Basketball Challenge</h1>
+            <div class="menu-options">
+                <button id="playButton">Play Game</button>
+                <button id="tutorialButton">Tutorial</button>
+                <button id="settingsButton">Settings</button>
+            </div>
+            <div class="high-scores">
+                <h2>High Scores</h2>
+                <ol id="highScoresList"></ol>
+            </div>
+        </div>
+
+        <div class="game-screen hidden" id="gameScreen">
+            <div class="hud">
+                <div class="stats">
+                    <div id="scoreboard">Score: <span id="score">0</span></div>
+                    <div id="timer">Time: <span id="time">60</span>s</div>
+                    <div id="streak">Streak: <span id="current-streak">0</span>x</div>
+                </div>
+                <div class="powerups">
+                    <button id="freezeTime" class="powerup">⏰</button>
+                    <button id="doublePoints" class="powerup">2x</button>
+                    <button id="guideLine" class="powerup">📊</button>
+                </div>
+            </div>
+            
+            <canvas id="gameCanvas"></canvas>
+
+            <div class="controls">
+                <div class="power-meter">
+                    <div class="power-fill" id="powerFill"></div>
+                </div>
+                <div class="angle-control">
+                    <input type="range" id="angleSlider" min="0" max="90" value="45">
+                    <span>Angle: <span id="angleValue">45</span>°</span>
+                </div>
+                <div class="spin-control">
+                    <button id="leftSpin">↺</button>
+                    <button id="noSpin">•</button>
+                    <button id="rightSpin">↻</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal hidden" id="gameOverModal">
+            <h2>Game Over!</h2>
+            <div class="stats-grid">
+                <div>Final Score: <span id="finalScore">0</span></div>
+                <div>Best Streak: <span id="bestStreak">0</span></div>
+                <div>Shots Made: <span id="shotsMade">0</span></div>
+                <div>Accuracy: <span id="accuracy">0</span>%</div>
+            </div>
+            <button id="restartButton">Play Again</button>
+            <button id="menuButton">Main Menu</button>
+        </div>
+
+        <div class="modal hidden" id="pauseModal">
+            <h2>Game Paused</h2>
+            <button id="resumeButton">Resume</button>
+            <button id="quitButton">Quit to Menu</button>
+        </div>
+        <div class="modal hidden" id="tutorialModal">
+            <h2>How to Play</h2>
+            <div class="tutorial-content">
+                <div class="tutorial-step">
+                    <p>1. Click and hold to charge shot power</p>
+                    <p>2. Use angle slider to adjust shot direction</p>
+                    <p>3. Use spin buttons to add ball rotation</p>
+                </div>
+                <div class="tutorial-powerups">
+                    <h3>Power-ups:</h3>
+                    <p>⏰ - Freeze Time</p>
+                    <p>2x - Double Points</p>
+                    <p>📊 - Shot Guide</p>
+                </div>
+            </div>
+            <button id="closeTutorial">Got it!</button>
+        </div>
+
+        <div class="modal hidden" id="settingsModal">
+            <h2>Settings</h2>
+            <div class="settings-content">
+                <div class="setting-item">
+                    <label for="musicVolume">Music Volume</label>
+                    <input type="range" id="musicVolume" min="0" max="100" value="30">
+                </div>
+                <div class="setting-item">
+                    <label for="soundVolume">Sound Effects</label>
+                    <input type="range" id="soundVolume" min="0" max="100" value="50">
+                </div>
+                <div class="setting-item">
+                    <label for="difficulty">Difficulty</label>
+                    <select id="difficulty">
+                        <option value="easy">Easy</option>
+                        <option value="normal" selected>Normal</option>
+                        <option value="hard">Hard</option>
+                    </select>
+                </div>
+            </div>
+            <button id="saveSettings">Save</button>
+        </div>
+    </div>
+    
+    <audio id="backgroundMusic" loop>
+        <source src="background-music.mp3" type="audio/mp3">
+    </audio>
+    <audio id="swooshSound" src="swoosh.mp3"></audio>
+    <audio id="bounceSound" src="bounce.mp3"></audio>
+
+    <script src="utils.js"></script>
+    <script src="ball.js"></script>
+    <script src="player.js"></script>
+    <script src="scoreboard.js"></script>
+    <script src="powerups.js"></script>
+    <script src="controls.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>
